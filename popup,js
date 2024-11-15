@@ -1,0 +1,14 @@
+// blocking site with timer
+document.getElementById("blockSite").addEventListener("click", () => {
+  const site = document.getElementById("siteInput").value;
+  const duration = parseInt(document.getElementById("durationInput").value, 10);
+
+  if (site && duration) {
+    const blockUntil = Date.now() + duration * 60 * 1000;
+    chrome.storage.sync.get(["blockedSites"], (data) => {
+      data.blockedSites[site] = blockUntil;
+      chrome.storage.sync.set({ blockedSites: data.blockedSites });
+    });
+    alert(`Blocked ${site} for ${duration} minutes.`);
+  }
+});
