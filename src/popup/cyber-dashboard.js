@@ -60,7 +60,7 @@
     // Get threat status from background
     chrome.runtime.sendMessage({ action: 'getThreatStatus' }, (response) => {
       if (chrome.runtime.lastError) {
-        console.warn('Background communication error:', chrome.runtime.lastError);
+        console.warn('Background communication error:', chrome.runtime.lastError.message || 'Unknown error');
         return;
       }
       
@@ -164,7 +164,7 @@
       if (tabs[0]) {
         chrome.tabs.sendMessage(tabs[0].id, { action: 'performDeepScan' }, (response) => {
           if (chrome.runtime.lastError) {
-            console.warn('Scan message error:', chrome.runtime.lastError);
+            console.warn('Scan message error:', chrome.runtime.lastError.message || 'Unknown error');
             addActivity('Scan completed (no response)', 'secure');
             return;
           }
@@ -195,7 +195,7 @@
               hostname: url.hostname 
             }, (response) => {
               if (chrome.runtime.lastError) {
-                console.warn('Fortress activation error:', chrome.runtime.lastError);
+                console.warn('Fortress activation error:', chrome.runtime.lastError.message || 'Unknown error');
                 addActivity('Fortress activation failed', 'warning');
                 return;
               }
@@ -227,7 +227,7 @@
       if (tabs[0]) {
         chrome.tabs.sendMessage(tabs[0].id, { action: 'toggleShield' }, (response) => {
           if (chrome.runtime.lastError) {
-            console.warn('Shield toggle error:', chrome.runtime.lastError);
+            console.warn('Shield toggle error:', chrome.runtime.lastError.message || 'Unknown error');
           } else if (response) {
             dashboardData.shieldActive = response.shieldActive;
           }

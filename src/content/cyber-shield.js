@@ -90,7 +90,16 @@
           ];
           
           const textContent = node.textContent || '';
-          const className = (node.className && typeof node.className === 'string') ? node.className.toLowerCase() : '';
+          // Handle className safely - it could be a string, DOMTokenList, or undefined
+          let className = '';
+          if (node.className) {
+            if (typeof node.className === 'string') {
+              className = node.className.toLowerCase();
+            } else if (node.className.toString) {
+              // For DOMTokenList or other objects with toString method
+              className = node.className.toString().toLowerCase();
+            }
+          }
           
           // Check text content and class names for threats
           const isSuspicious = suspiciousPatterns.some(pattern => 
@@ -301,7 +310,7 @@
         shieldConfig.realTimeProtection = !shieldConfig.realTimeProtection;
         chrome.storage.sync.set({ cyberSettings: shieldConfig }, () => {
           if (chrome.runtime.lastError) {
-            console.warn('Storage error:', chrome.runtime.lastError);
+            console.warn('Storage error:', chrome.runtime.lastError.message || 'Unknown error');
           }
         });
         sendResponse({ shieldActive: shieldConfig.realTimeProtection });

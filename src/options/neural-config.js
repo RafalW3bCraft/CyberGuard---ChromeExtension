@@ -123,7 +123,7 @@
   function loadCurrentConfiguration() {
     chrome.storage.sync.get(['digitalFortress', 'cyberSettings', 'neuralAnalytics'], (data) => {
       if (chrome.runtime.lastError) {
-        console.error('Error loading configuration:', chrome.runtime.lastError);
+        console.error('Error loading configuration:', chrome.runtime.lastError.message || 'Unknown error');
         showMessage('Error loading configuration', 'error');
         return;
       }
@@ -413,7 +413,7 @@
     
     chrome.storage.sync.set(saveData, () => {
       if (chrome.runtime.lastError) {
-        console.error('Save error:', chrome.runtime.lastError);
+        console.error('Save error:', chrome.runtime.lastError.message || 'Unknown error');
         showMessage('Error saving configuration', 'error');
         elements.configStatus.textContent = 'ERROR';
       } else {

@@ -37,7 +37,7 @@ function initializeCyberDefense() {
 
   chrome.storage.sync.get(defaultConfig, (data) => {
     if (chrome.runtime.lastError) {
-      console.error('❌ Neural Network Storage Error:', chrome.runtime.lastError);
+      console.error('❌ Neural Network Storage Error:', chrome.runtime.lastError.message || 'Unknown error');
       return;
     }
     
