@@ -173,18 +173,30 @@
     showButtonAnimation(elements.fortressBtn);
     
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      if (tabs[0]) {
-        const url = new URL(tabs[0].url);
-        chrome.runtime.sendMessage({ 
-          action: 'activateFortress', 
-          hostname: url.hostname 
-        }, (response) => {
-          if (response && response.status === 'FORTRESS_ACTIVATED') {
-            addActivity(`Fortress blocked: ${url.hostname}`, 'danger');
-            dashboardData.blockedThreats++;
-            updateDashboard();
+      if (tabs[0] && tabs[0].url) {
+        try {
+          // Validate URL before creating URL object
+          const tabUrl = tabs[0].url;
+          if (tabUrl.startsWith('http://') || tabUrl.startsWith('https://')) {
+            const url = new URL(tabUrl);
+            chrome.runtime.sendMessage({ 
+              action: 'activateFortress', 
+              hostname: url.hostname 
+            }, (response) => {
+              if (response && response.status === 'FORTRESS_ACTIVATED') {
+                addActivity(`Fortress blocked: ${url.hostname}`, 'danger');
+                dashboardData.blockedThreats++;
+                updateDashboard();
+              }
+            });
+          } else {
+            // Handle non-HTTP URLs (chrome://, extension pages, etc.)
+            addActivity('Cannot block system pages', 'warning');
           }
-        });
+        } catch (error) {
+          console.warn('URL parsing error:', error);
+          addActivity('Invalid URL detected', 'warning');
+        }
       }
     });
   }

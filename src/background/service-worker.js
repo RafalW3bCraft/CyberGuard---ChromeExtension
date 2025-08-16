@@ -70,6 +70,11 @@ function startThreatMonitoring() {
 
 function analyzeThreatLevel(url, tabId) {
   try {
+    // Validate URL before creating URL object
+    if (!url || (!url.startsWith('http://') && !url.startsWith('https://'))) {
+      return; // Skip non-HTTP URLs
+    }
+    
     const hostname = new URL(url).hostname.toLowerCase();
     
     // Cyber threat detection patterns
