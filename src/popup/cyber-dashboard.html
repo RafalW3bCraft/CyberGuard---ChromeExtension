@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CyberGuard Control Panel</title>
+  <link rel="stylesheet" href="../styles/cyber-theme.css">
+  <link rel="stylesheet" href="cyber-dashboard.css">
+</head>
+<body>
+  <div class="cyber-container">
+    <!-- Header -->
+    <header class="cyber-header">
+      <div class="header-title">
+        <span class="cyber-icon">🔴</span>
+        <h1>CYBERGUARD</h1>
+        <span class="version">v1.0</span>
+      </div>
+      <div class="threat-indicator" id="threatIndicator">
+        <span class="status-led"></span>
+        <span class="status-text">SECURE</span>
+      </div>
+    </header>
+
+    <!-- Main Dashboard -->
+    <main class="dashboard">
+      <!-- System Status Panel -->
+      <section class="status-panel">
+        <h2>🛡️ SYSTEM STATUS</h2>
+        <div class="status-grid">
+          <div class="status-item">
+            <div class="status-label">THREAT LEVEL</div>
+            <div class="status-value threat-level" id="threatLevel">GREEN</div>
+          </div>
+          <div class="status-item">
+            <div class="status-label">SECURE CONNECTIONS</div>
+            <div class="status-value" id="secureConnections">0</div>
+          </div>
+          <div class="status-item">
+            <div class="status-label">THREATS BLOCKED</div>
+            <div class="status-value" id="blockedThreats">0</div>
+          </div>
+          <div class="status-item">
+            <div class="status-label">SHIELD STATUS</div>
+            <div class="status-value shield-status" id="shieldStatus">ACTIVE</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Quick Actions -->
+      <section class="actions-panel">
+        <h2>⚡ QUICK ACTIONS</h2>
+        <div class="action-buttons">
+          <button class="cyber-btn primary" id="quantumScanBtn">
+            <span class="btn-icon">🔬</span>
+            <span class="btn-text">QUANTUM SCAN</span>
+          </button>
+          <button class="cyber-btn secondary" id="fortressBtn">
+            <span class="btn-icon">🏰</span>
+            <span class="btn-text">DIGITAL FORTRESS</span>
+          </button>
+          <button class="cyber-btn tertiary" id="shieldToggleBtn">
+            <span class="btn-icon">🛡️</span>
+            <span class="btn-text">TOGGLE SHIELD</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Neural Analytics -->
+      <section class="analytics-panel">
+        <h2>🧠 NEURAL ANALYTICS</h2>
+        <div class="analytics-display">
+          <canvas id="threatChart" width="280" height="80"></canvas>
+          <div class="analytics-stats">
+            <div class="stat">
+              <span class="stat-label">SECURITY SCORE</span>
+              <span class="stat-value" id="securityScore">100</span>
+            </div>
+            <div class="stat">
+              <span class="stat-label">SESSION TIME</span>
+              <span class="stat-value" id="sessionTime">00:00</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Recent Activity -->
+      <section class="activity-panel">
+        <h2>📡 RECENT ACTIVITY</h2>
+        <div class="activity-log" id="activityLog">
+          <div class="activity-item">
+            <span class="activity-time">00:00:00</span>
+            <span class="activity-text">Neural network initialized</span>
+            <span class="activity-status secure">✓</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="cyber-footer">
+      <button class="settings-btn" id="settingsBtn">⚙️ NEURAL CONFIG</button>
+      <div class="power-status">
+        <span class="power-led"></span>
+        <span>ONLINE</span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Loading Overlay -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-content">
+      <div class="loading-spinner"></div>
+      <div class="loading-text">INITIALIZING NEURAL NETWORK...</div>
+    </div>
+  </div>
+
+  <script src="cyber-dashboard.js"></script>
+</body>
+</html>

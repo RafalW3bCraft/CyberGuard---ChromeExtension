@@ -1,0 +1,383 @@
+/* CyberGuard Global Theme Styles */
+
+/* Font Imports */
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+/* CSS Custom Properties for Cyber Theme */
+:root {
+  --cyber-black: #0a0a0a;
+  --cyber-dark-blue: #1a1a2e;
+  --cyber-green: #00ff00;
+  --cyber-bright-green: #39ff14;
+  --cyber-cyan: #00ffff;
+  --cyber-blue: #0080ff;
+  --cyber-red: #ff0040;
+  --cyber-yellow: #ffff00;
+  --cyber-purple: #8000ff;
+  --cyber-gray: #333333;
+  --cyber-light-gray: #666666;
+  
+  /* Gradients */
+  --cyber-bg-gradient: linear-gradient(135deg, var(--cyber-black) 0%, var(--cyber-dark-blue) 100%);
+  --cyber-panel-gradient: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.1), transparent);
+  --cyber-border-gradient: linear-gradient(90deg, var(--cyber-green), var(--cyber-cyan), var(--cyber-green));
+  
+  /* Shadows */
+  --cyber-glow-green: 0 0 10px var(--cyber-green);
+  --cyber-glow-cyan: 0 0 15px var(--cyber-cyan);
+  --cyber-glow-red: 0 0 12px var(--cyber-red);
+  
+  /* Fonts */
+  --cyber-font-primary: 'Share Tech Mono', 'Courier New', 'Monaco', monospace;
+  --cyber-font-secondary: 'Courier New', monospace;
+}
+
+/* Global Styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--cyber-bg-gradient);
+  color: var(--cyber-green);
+  font-family: var(--cyber-font-primary);
+  margin: 0;
+  padding: 0;
+  line-height: 1.4;
+  font-size: 14px;
+}
+
+/* Cyber Button Base Styles */
+.cyber-btn {
+  background: transparent;
+  border: 1px solid var(--cyber-green);
+  color: var(--cyber-green);
+  padding: 8px 16px;
+  font-family: var(--cyber-font-primary);
+  font-size: 12px;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.cyber-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--cyber-panel-gradient);
+  transition: left 0.5s ease;
+  z-index: -1;
+}
+
+.cyber-btn:hover::before {
+  left: 100%;
+}
+
+.cyber-btn:hover {
+  box-shadow: var(--cyber-glow-green);
+  transform: translateY(-1px);
+}
+
+.cyber-btn:active {
+  transform: translateY(0);
+}
+
+/* Cyber Button Variants */
+.cyber-btn.primary {
+  border-color: var(--cyber-cyan);
+  color: var(--cyber-cyan);
+}
+
+.cyber-btn.primary:hover {
+  box-shadow: var(--cyber-glow-cyan);
+}
+
+.cyber-btn.secondary {
+  border-color: var(--cyber-yellow);
+  color: var(--cyber-yellow);
+}
+
+.cyber-btn.secondary:hover {
+  box-shadow: 0 0 15px var(--cyber-yellow);
+}
+
+.cyber-btn.danger {
+  border-color: var(--cyber-red);
+  color: var(--cyber-red);
+}
+
+.cyber-btn.danger:hover {
+  box-shadow: var(--cyber-glow-red);
+}
+
+/* Cyber Panels */
+.cyber-panel {
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(0, 255, 0, 0.3);
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.cyber-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--cyber-border-gradient);
+}
+
+.cyber-panel h2, .cyber-panel h3 {
+  color: var(--cyber-cyan);
+  margin: 0 0 10px 0;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+  padding-bottom: 5px;
+}
+
+/* Cyber Inputs */
+.cyber-input {
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(0, 255, 0, 0.5);
+  color: var(--cyber-green);
+  padding: 8px 12px;
+  font-family: var(--cyber-font-primary);
+  font-size: 12px;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+.cyber-input:focus {
+  outline: none;
+  border-color: var(--cyber-cyan);
+  box-shadow: var(--cyber-glow-cyan);
+  background: rgba(0, 50, 50, 0.3);
+}
+
+.cyber-input::placeholder {
+  color: var(--cyber-light-gray);
+}
+
+/* Cyber Select */
+.cyber-select {
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(0, 255, 0, 0.5);
+  color: var(--cyber-green);
+  padding: 8px 12px;
+  font-family: var(--cyber-font-primary);
+  font-size: 12px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cyber-select:hover {
+  border-color: var(--cyber-cyan);
+}
+
+/* Cyber Checkbox */
+.cyber-checkbox {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+}
+
+.cyber-checkbox input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.cyber-checkbox .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: transparent;
+  border: 1px solid var(--cyber-green);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.cyber-checkbox input:checked ~ .checkmark {
+  background-color: var(--cyber-green);
+  box-shadow: var(--cyber-glow-green);
+}
+
+.cyber-checkbox .checkmark::after {
+  content: '';
+  position: absolute;
+  display: none;
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid var(--cyber-black);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.cyber-checkbox input:checked ~ .checkmark::after {
+  display: block;
+}
+
+/* Cyber Text Styles */
+.cyber-text {
+  color: var(--cyber-green);
+  font-family: var(--cyber-font-primary);
+}
+
+.cyber-text.primary { color: var(--cyber-cyan); }
+.cyber-text.secondary { color: var(--cyber-yellow); }
+.cyber-text.danger { color: var(--cyber-red); }
+.cyber-text.success { color: var(--cyber-bright-green); }
+
+/* Status Indicators */
+.status-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 15px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid;
+}
+
+.status-indicator.online {
+  border-color: var(--cyber-green);
+  color: var(--cyber-green);
+}
+
+.status-indicator.warning {
+  border-color: var(--cyber-yellow);
+  color: var(--cyber-yellow);
+}
+
+.status-indicator.alert {
+  border-color: var(--cyber-red);
+  color: var(--cyber-red);
+}
+
+.status-indicator::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 8px currentColor;
+  animation: statusPulse 2s infinite;
+}
+
+/* Progress Bars */
+.cyber-progress {
+  width: 100%;
+  height: 6px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(0, 255, 0, 0.3);
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+}
+
+.cyber-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--cyber-green), var(--cyber-cyan));
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px var(--cyber-green);
+}
+
+/* Animations */
+@keyframes cyberPulse {
+  0%, 100% { 
+    opacity: 0.7; 
+    transform: scale(1); 
+  }
+  50% { 
+    opacity: 1; 
+    transform: scale(1.05); 
+  }
+}
+
+@keyframes statusPulse {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+@keyframes cyberGlow {
+  0%, 100% { 
+    box-shadow: 0 0 5px currentColor; 
+  }
+  50% { 
+    box-shadow: 0 0 20px currentColor, 0 0 30px currentColor; 
+  }
+}
+
+@keyframes matrixRain {
+  0% { transform: translateY(-100%); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+
+@keyframes glitchEffect {
+  0% { transform: translate(0); }
+  20% { transform: translate(-1px, 1px); }
+  40% { transform: translate(-1px, -1px); }
+  60% { transform: translate(1px, 1px); }
+  80% { transform: translate(1px, -1px); }
+  100% { transform: translate(0); }
+}
+
+@keyframes scanline {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Utility Classes */
+.cyber-animate-pulse { animation: cyberPulse 2s infinite; }
+.cyber-animate-glow { animation: cyberGlow 3s infinite; }
+.cyber-animate-glitch { animation: glitchEffect 0.5s infinite; }
+
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.mb-10 { margin-bottom: 10px; }
+.mb-15 { margin-bottom: 15px; }
+.mb-20 { margin-bottom: 20px; }
+
+.p-10 { padding: 10px; }
+.p-15 { padding: 15px; }
+.p-20 { padding: 20px; }
+
+/* Responsive Design */
+@media (max-width: 400px) {
+  .cyber-btn {
+    padding: 6px 12px;
+    font-size: 11px;
+  }
+  
+  .cyber-panel {
+    padding: 10px;
+  }
+}
+
+/* Dark mode compatibility */
+@media (prefers-color-scheme: dark) {
+  /* Already optimized for dark themes */
+}

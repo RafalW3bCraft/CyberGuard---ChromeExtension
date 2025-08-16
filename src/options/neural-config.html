@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CyberGuard - Neural Configuration</title>
+  <link rel="stylesheet" href="../styles/cyber-theme.css">
+  <link rel="stylesheet" href="neural-config.css">
+</head>
+<body>
+  <div class="neural-container">
+    <!-- Header -->
+    <header class="neural-header">
+      <div class="header-content">
+        <div class="logo-section">
+          <span class="cyber-icon">🔴</span>
+          <h1>CYBERGUARD NEURAL CONFIG</h1>
+          <span class="version">v1.0</span>
+        </div>
+        <div class="system-status">
+          <div class="status-indicator online">
+            <span class="status-dot"></span>
+            NEURAL NETWORK ONLINE
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Configuration -->
+    <main class="config-main">
+      <!-- Navigation Tabs -->
+      <nav class="config-nav">
+        <button class="nav-tab active" data-tab="fortress">🏰 DIGITAL FORTRESS</button>
+        <button class="nav-tab" data-tab="shield">🛡️ CYBER SHIELD</button>
+        <button class="nav-tab" data-tab="analytics">🧠 NEURAL ANALYTICS</button>
+        <button class="nav-tab" data-tab="interface">🎨 INTERFACE</button>
+      </nav>
+
+      <!-- Tab Contents -->
+      <div class="tab-contents">
+        
+        <!-- Digital Fortress Tab -->
+        <section class="tab-content active" id="fortress-tab">
+          <div class="config-panel">
+            <h2>🏰 Digital Fortress Configuration</h2>
+            
+            <!-- Fortress Mode Settings -->
+            <div class="setting-group">
+              <h3>Fortress Protection Mode</h3>
+              <div class="setting-item">
+                <label class="setting-label">
+                  <div class="cyber-checkbox">
+                    <input type="checkbox" id="fortressEnabled">
+                    <span class="checkmark"></span>
+                  </div>
+                  Enable Digital Fortress
+                </label>
+                <p class="setting-desc">Automatically block malicious and suspicious websites</p>
+              </div>
+              
+              <div class="setting-item">
+                <label class="setting-label">Blocking Intensity</label>
+                <select class="cyber-select" id="blockingIntensity">
+                  <option value="low">Low - Basic threats only</option>
+                  <option value="medium" selected>Medium - Standard protection</option>
+                  <option value="high">High - Maximum security</option>
+                  <option value="paranoid">Paranoid - Ultra-secure mode</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Blocked Sites Management -->
+            <div class="setting-group">
+              <h3>Blocked Sites Management</h3>
+              <div class="blocked-sites-control">
+                <div class="input-group">
+                  <input type="text" class="cyber-input" id="newBlockedSite" placeholder="Enter domain to block (e.g., example.com)">
+                  <button class="cyber-btn primary" id="addBlockedSite">ADD TO FORTRESS</button>
+                </div>
+                <div class="blocked-sites-list" id="blockedSitesList">
+                  <!-- Dynamic content -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Whitelist Management -->
+            <div class="setting-group">
+              <h3>Trusted Sites (Whitelist)</h3>
+              <div class="whitelist-control">
+                <div class="input-group">
+                  <input type="text" class="cyber-input" id="newWhitelistSite" placeholder="Enter trusted domain">
+                  <button class="cyber-btn secondary" id="addWhitelistSite">ADD TO WHITELIST</button>
+                </div>
+                <div class="whitelist-sites-list" id="whitelistSitesList">
+                  <!-- Dynamic content -->
+                </div>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <!-- Cyber Shield Tab -->
+        <section class="tab-content" id="shield-tab">
+          <div class="config-panel">
+            <h2>🛡️ Cyber Shield Configuration</h2>
+            
+            <!-- Real-time Protection -->
+            <div class="setting-group">
+              <h3>Real-time Protection</h3>
+              <div class="setting-item">
+                <label class="setting-label">
+                  <div class="cyber-checkbox">
+                    <input type="checkbox" id="realTimeProtection">
+                    <span class="checkmark"></span>
+                  </div>
+                  Enable Real-time Threat Detection
+                </label>
+                <p class="setting-desc">Continuously scan web pages for malicious content</p>
+              </div>
+              
+              <div class="setting-item">
+                <label class="setting-label">
+                  <div class="cyber-checkbox">
+                    <input type="checkbox" id="quantumEncryption">
+                    <span class="checkmark"></span>
+                  </div>
+                  Quantum Encryption Analysis
+                </label>
+                <p class="setting-desc">Analyze and display HTTPS security status</p>
+              </div>
+              
+              <div class="setting-item">
+                <label class="setting-label">
+                  <div class="cyber-checkbox">
+                    <input type="checkbox" id="threatQuarantine">
+                    <span class="checkmark"></span>
+                  </div>
+                  Automatic Threat Quarantine
+                </label>
+                <p class="setting-desc">Automatically isolate suspicious page elements</p>
+              </div>
+            </div>
+
+            <!-- Shield Sensitivity -->
+            <div class="setting-group">
+              <h3>Detection Sensitivity</h3>
+              <div class="setting-item">
+                <label class="setting-label">Threat Detection Level</label>
+                <div class="slider-container">
+                  <input type="range" class="cyber-slider" id="threatSensitivity" min="1" max="5" value="3">
+                  <div class="slider-labels">
+                    <span>Low</span>
+                    <span>Medium</span>
+                    <span>High</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Neural Analytics Tab -->
+        <section class="tab-content" id="analytics-tab">
+          <div class="config-panel">
+            <h2>🧠 Neural Analytics Configuration</h2>
+            
+            <!-- Analytics Settings -->
+            <div class="setting-group">
+              <h3>Data Collection</h3>
+              <div class="setting-item">
+                <label class="setting-label">
+                  <div class="cyber-checkbox">
+                    <input type="checkbox" id="analyticsEnabled">
+                    <span class="checkmark"></span>
+                  </div>
+                  Enable Neural Analytics
+                </label>
+                <p class="setting-desc">Collect browsing patterns for security analysis</p>
+              </div>
+              
+              <div class="setting-item">
+                <label class="setting-label">
+                  <div class="cyber-checkbox">
+                    <input type="checkbox" id="behaviorAnalysis">
+                    <span class="checkmark"></span>
+                  </div>
+                  Behavioral Pattern Analysis
+                </label>
+                <p class="setting-desc">Analyze browsing behavior for threat prediction</p>
+              </div>
+            </div>
+
+            <!-- Analytics Display -->
+            <div class="setting-group">
+              <h3>Current Analytics Data</h3>
+              <div class="analytics-summary">
+                <div class="analytics-stat">
+                  <div class="stat-label">Security Score</div>
+                  <div class="stat-value" id="currentSecurityScore">100</div>
+                </div>
+                <div class="analytics-stat">
+                  <div class="stat-label">Threats Detected</div>
+                  <div class="stat-value" id="totalThreatsDetected">0</div>
+                </div>
+                <div class="analytics-stat">
+                  <div class="stat-label">Safe Sessions</div>
+                  <div class="stat-value" id="safeSessions">0</div>
+                </div>
+              </div>
+              
+              <div class="analytics-actions">
+                <button class="cyber-btn secondary" id="exportAnalytics">EXPORT DATA</button>
+                <button class="cyber-btn danger" id="clearAnalytics">CLEAR DATA</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Interface Tab -->
+        <section class="tab-content" id="interface-tab">
+          <div class="config-panel">
+            <h2>🎨 Interface Configuration</h2>
+            
+            <!-- Visual Theme -->
+            <div class="setting-group">
+              <h3>Cyber Theme</h3>
+              <div class="setting-item">
+                <label class="setting-label">Primary Color Scheme</label>
+                <select class="cyber-select" id="colorScheme">
+                  <option value="matrix">Matrix Green</option>
+                  <option value="neon">Neon Blue</option>
+                  <option value="danger">Danger Red</option>
+                  <option value="cyber">Cyber Purple</option>
+                </select>
+              </div>
+              
+              <div class="setting-item">
+                <label class="setting-label">
+                  <div class="cyber-checkbox">
+                    <input type="checkbox" id="matrixEffects">
+                    <span class="checkmark"></span>
+                  </div>
+                  Enable Matrix Effects
+                </label>
+                <p class="setting-desc">Show matrix rain and cyber animations</p>
+              </div>
+              
+              <div class="setting-item">
+                <label class="setting-label">
+                  <div class="cyber-checkbox">
+                    <input type="checkbox" id="glitchEffects">
+                    <span class="checkmark"></span>
+                  </div>
+                  Enable Glitch Effects
+                </label>
+                <p class="setting-desc">Add glitch animations for cyber aesthetic</p>
+              </div>
+            </div>
+
+            <!-- Notifications -->
+            <div class="setting-group">
+              <h3>Notification Settings</h3>
+              <div class="setting-item">
+                <label class="setting-label">
+                  <div class="cyber-checkbox">
+                    <input type="checkbox" id="threatNotifications">
+                    <span class="checkmark"></span>
+                  </div>
+                  Threat Detection Notifications
+                </label>
+                <p class="setting-desc">Show notifications when threats are detected</p>
+              </div>
+              
+              <div class="setting-item">
+                <label class="setting-label">
+                  <div class="cyber-checkbox">
+                    <input type="checkbox" id="systemNotifications">
+                    <span class="checkmark"></span>
+                  </div>
+                  System Status Notifications
+                </label>
+                <p class="setting-desc">Show notifications for system events</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="neural-footer">
+      <div class="footer-actions">
+        <button class="cyber-btn primary" id="saveAllSettings">SAVE NEURAL CONFIG</button>
+        <button class="cyber-btn secondary" id="resetToDefaults">RESET DEFAULTS</button>
+        <button class="cyber-btn tertiary" id="exportConfig">EXPORT CONFIG</button>
+      </div>
+      <div class="footer-info">
+        <span>CyberGuard Neural Network Configuration Panel</span>
+        <span class="footer-status">
+          <span class="status-dot"></span>
+          Configuration Sync: <span id="configStatus">READY</span>
+        </span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Status Messages -->
+  <div class="message-container" id="messageContainer"></div>
+
+  <script src="neural-config.js"></script>
+</body>
+</html>

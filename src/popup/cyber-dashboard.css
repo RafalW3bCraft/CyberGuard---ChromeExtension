@@ -1,0 +1,382 @@
+/* CyberGuard Dashboard Styles */
+
+body {
+  width: 350px;
+  min-height: 500px;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+  color: #00ff00;
+  font-family: 'Courier New', 'Monaco', monospace;
+  overflow-x: hidden;
+}
+
+.cyber-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  position: relative;
+}
+
+/* Header Styles */
+.cyber-header {
+  background: linear-gradient(90deg, #000 0%, #1a1a2e 50%, #000 100%);
+  border-bottom: 1px solid #00ff00;
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cyber-icon {
+  font-size: 16px;
+  animation: cyberPulse 2s infinite;
+}
+
+.header-title h1 {
+  margin: 0;
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: #00ffff;
+}
+
+.version {
+  font-size: 10px;
+  color: #666;
+}
+
+.threat-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.status-led {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #00ff00;
+  box-shadow: 0 0 10px #00ff00;
+  animation: ledPulse 1.5s infinite;
+}
+
+.status-text {
+  font-size: 10px;
+  font-weight: bold;
+}
+
+/* Dashboard Styles */
+.dashboard {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+}
+
+.dashboard section {
+  margin-bottom: 20px;
+  border: 1px solid rgba(0, 255, 0, 0.3);
+  border-radius: 5px;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.dashboard h2 {
+  margin: 0 0 10px 0;
+  font-size: 12px;
+  color: #00ffff;
+  border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+  padding-bottom: 5px;
+}
+
+/* Status Panel */
+.status-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.status-item {
+  text-align: center;
+  padding: 8px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 3px;
+  border: 1px solid rgba(0, 255, 0, 0.2);
+}
+
+.status-label {
+  font-size: 9px;
+  color: #888;
+  margin-bottom: 4px;
+}
+
+.status-value {
+  font-size: 12px;
+  font-weight: bold;
+  color: #00ff00;
+}
+
+.threat-level.GREEN { color: #00ff00; }
+.threat-level.YELLOW { color: #ffff00; }
+.threat-level.RED { color: #ff0040; }
+
+.shield-status {
+  text-shadow: 0 0 5px currentColor;
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cyber-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 15px;
+  background: transparent;
+  border: 1px solid #00ff00;
+  color: #00ff00;
+  font-family: inherit;
+  font-size: 11px;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.cyber-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.cyber-btn:hover::before {
+  left: 100%;
+}
+
+.cyber-btn:hover {
+  background: rgba(0, 255, 0, 0.1);
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+  transform: translateY(-1px);
+}
+
+.cyber-btn.primary { border-color: #00ffff; color: #00ffff; }
+.cyber-btn.secondary { border-color: #ffff00; color: #ffff00; }
+.cyber-btn.tertiary { border-color: #ff0040; color: #ff0040; }
+
+.cyber-btn:active {
+  transform: translateY(0);
+}
+
+.btn-icon {
+  font-size: 14px;
+}
+
+/* Analytics Panel */
+.analytics-display {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#threatChart {
+  width: 100%;
+  height: 80px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(0, 255, 0, 0.3);
+  border-radius: 3px;
+}
+
+.analytics-stats {
+  display: flex;
+  justify-content: space-between;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.stat-label {
+  font-size: 9px;
+  color: #666;
+}
+
+.stat-value {
+  font-size: 14px;
+  font-weight: bold;
+  color: #00ff00;
+  text-shadow: 0 0 5px currentColor;
+}
+
+/* Activity Log */
+.activity-log {
+  max-height: 80px;
+  overflow-y: auto;
+  font-size: 10px;
+}
+
+.activity-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(0, 255, 0, 0.1);
+}
+
+.activity-time {
+  color: #666;
+  width: 50px;
+  flex-shrink: 0;
+}
+
+.activity-text {
+  flex: 1;
+  color: #ccc;
+}
+
+.activity-status {
+  width: 12px;
+  text-align: center;
+}
+
+.activity-status.secure { color: #00ff00; }
+.activity-status.warning { color: #ffff00; }
+.activity-status.danger { color: #ff0040; }
+
+/* Footer */
+.cyber-footer {
+  background: linear-gradient(90deg, #000 0%, #1a1a2e 50%, #000 100%);
+  border-top: 1px solid #00ff00;
+  padding: 10px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.settings-btn {
+  background: transparent;
+  border: 1px solid #666;
+  color: #666;
+  padding: 6px 12px;
+  font-family: inherit;
+  font-size: 10px;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+.settings-btn:hover {
+  border-color: #00ff00;
+  color: #00ff00;
+}
+
+.power-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  color: #666;
+}
+
+.power-led {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #00ff00;
+  box-shadow: 0 0 8px #00ff00;
+  animation: ledPulse 2s infinite;
+}
+
+/* Loading Overlay */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.loading-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.loading-content {
+  text-align: center;
+  color: #00ff00;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgba(0, 255, 0, 0.3);
+  border-top: 2px solid #00ff00;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 15px;
+}
+
+.loading-text {
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+/* Animations */
+@keyframes cyberPulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+
+@keyframes ledPulse {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 255, 0, 0.5);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 255, 0, 0.7);
+}

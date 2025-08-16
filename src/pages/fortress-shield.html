@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CyberGuard - Digital Fortress Activated</title>
+  <link rel="stylesheet" href="../styles/cyber-theme.css">
+  <link rel="stylesheet" href="fortress-shield.css">
+</head>
+<body>
+  <div class="fortress-container">
+    <!-- Background Matrix Effect -->
+    <div class="matrix-background" id="matrixBg"></div>
+    
+    <!-- Main Shield Interface -->
+    <div class="shield-interface">
+      <!-- Header -->
+      <header class="fortress-header">
+        <div class="header-grid">
+          <div class="system-status">
+            <span class="status-indicator online">
+              <span class="status-dot"></span>
+              FORTRESS ONLINE
+            </span>
+          </div>
+          <div class="threat-level">
+            <span class="threat-indicator high">
+              <span class="threat-icon">🔴</span>
+              THREAT LEVEL: HIGH
+            </span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main class="fortress-main">
+        <div class="shield-display">
+          <!-- Central Shield Icon -->
+          <div class="shield-icon">
+            <svg class="shield-svg" viewBox="0 0 100 100">
+              <defs>
+                <linearGradient id="shieldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#00ff00;stop-opacity:1" />
+                  <stop offset="50%" style="stop-color:#00ffff;stop-opacity:1" />
+                  <stop offset="100%" style="stop-color:#0080ff;stop-opacity:1" />
+                </linearGradient>
+              </defs>
+              <path d="M50 5 L80 20 L80 45 Q80 70 50 95 Q20 70 20 45 L20 20 Z" 
+                    fill="url(#shieldGradient)" 
+                    stroke="#00ff00" 
+                    stroke-width="2"/>
+              <text x="50" y="55" text-anchor="middle" fill="#000" font-family="monospace" font-size="24" font-weight="bold">🛡️</text>
+            </svg>
+          </div>
+
+          <!-- Threat Information -->
+          <div class="threat-info">
+            <h1 class="fortress-title">DIGITAL FORTRESS ACTIVATED</h1>
+            <div class="blocked-site">
+              <span class="site-label">BLOCKED SITE:</span>
+              <span class="site-name" id="blockedSite">unknown.domain</span>
+            </div>
+            <div class="threat-details">
+              <div class="detail-item">
+                <span class="detail-label">THREAT TYPE:</span>
+                <span class="detail-value threat-high">MALICIOUS CONTENT</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">PROTECTION:</span>
+                <span class="detail-value status-active">ACTIVE</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">SCAN TIME:</span>
+                <span class="detail-value" id="scanTime">00:00:00</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Panel -->
+          <div class="action-panel">
+            <h2>SECURITY ACTIONS</h2>
+            <div class="action-buttons">
+              <button class="fortress-btn primary" id="safeRedirectBtn">
+                <span class="btn-icon">🔒</span>
+                <span class="btn-text">SECURE REDIRECT</span>
+              </button>
+              <button class="fortress-btn secondary" id="reportThreatBtn">
+                <span class="btn-icon">📡</span>
+                <span class="btn-text">REPORT THREAT</span>
+              </button>
+              <button class="fortress-btn danger" id="closeTabBtn">
+                <span class="btn-icon">❌</span>
+                <span class="btn-text">CLOSE TAB</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Security Stats -->
+          <div class="security-stats">
+            <div class="stat-item">
+              <div class="stat-label">THREATS BLOCKED TODAY</div>
+              <div class="stat-value" id="threatsBlocked">0</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-label">SECURITY SCORE</div>
+              <div class="stat-value" id="securityScore">100</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-label">UPTIME</div>
+              <div class="stat-value" id="uptime">00:00:00</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- System Messages -->
+        <div class="system-messages">
+          <div class="message-header">🔬 NEURAL NETWORK ANALYSIS</div>
+          <div class="message-content">
+            <div class="analysis-item">
+              <span class="analysis-icon">🔍</span>
+              <span class="analysis-text">Deep packet inspection completed</span>
+              <span class="analysis-status success">✓</span>
+            </div>
+            <div class="analysis-item">
+              <span class="analysis-icon">🧠</span>
+              <span class="analysis-text">Behavioral pattern analysis</span>
+              <span class="analysis-status success">✓</span>
+            </div>
+            <div class="analysis-item">
+              <span class="analysis-icon">🛡️</span>
+              <span class="analysis-text">Threat signature match found</span>
+              <span class="analysis-status warning">⚠</span>
+            </div>
+            <div class="analysis-item">
+              <span class="analysis-icon">🚫</span>
+              <span class="analysis-text">Access denied - protection active</span>
+              <span class="analysis-status danger">✗</span>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Footer -->
+      <footer class="fortress-footer">
+        <div class="footer-info">
+          <div class="cyber-logo">
+            <span class="logo-icon">🔴</span>
+            <span class="logo-text">CYBERGUARD</span>
+          </div>
+          <div class="protection-status">
+            <span class="protection-text">Digital Fortress Protection Active</span>
+            <span class="protection-indicator"></span>
+          </div>
+        </div>
+        <div class="footer-quote">
+          <em id="motivationalQuote">"The best defense is a good offense in cyberspace."</em>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <script src="fortress-shield.js"></script>
+</body>
+</html>

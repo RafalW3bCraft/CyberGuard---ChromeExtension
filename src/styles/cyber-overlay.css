@@ -1,0 +1,340 @@
+/* CyberGuard Content Overlay Styles */
+
+/* Quantum Scan Display */
+#cyber-quantum-display {
+  position: fixed !important;
+  top: 20px !important;
+  right: 20px !important;
+  z-index: 999999 !important;
+  font-family: 'Courier New', 'Monaco', monospace !important;
+  animation: quantumSlide 0.5s ease-out !important;
+}
+
+.quantum-panel {
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%) !important;
+  border: 1px solid #00ff00 !important;
+  border-radius: 5px !important;
+  padding: 15px !important;
+  color: #00ff00 !important;
+  font-size: 12px !important;
+  min-width: 250px !important;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.3), inset 0 0 10px rgba(0, 255, 0, 0.1) !important;
+  position: relative !important;
+}
+
+.quantum-panel::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 1px !important;
+  background: linear-gradient(90deg, transparent, #00ffff, transparent) !important;
+}
+
+.quantum-header {
+  text-align: center !important;
+  font-weight: bold !important;
+  margin-bottom: 10px !important;
+  color: #00ffff !important;
+  text-shadow: 0 0 5px #00ffff !important;
+  font-size: 11px !important;
+  letter-spacing: 1px !important;
+}
+
+.quantum-data {
+  margin: 10px 0 !important;
+}
+
+.quantum-data div {
+  margin: 5px 0 !important;
+  padding: 2px 0 !important;
+  border-bottom: 1px solid rgba(0, 255, 0, 0.1) !important;
+}
+
+.quantum-data div:last-child {
+  border-bottom: none !important;
+}
+
+.secure { 
+  color: #00ff00 !important;
+  text-shadow: 0 0 3px #00ff00 !important;
+}
+
+.insecure { 
+  color: #ff0040 !important;
+  text-shadow: 0 0 3px #ff0040 !important;
+  animation: cyberPulse 1s infinite !important;
+}
+
+.warning { 
+  color: #ffff00 !important;
+  text-shadow: 0 0 3px #ffff00 !important;
+}
+
+.quantum-close {
+  position: absolute !important;
+  top: 5px !important;
+  right: 10px !important;
+  cursor: pointer !important;
+  color: #ff0040 !important;
+  font-weight: bold !important;
+  font-size: 16px !important;
+  width: 20px !important;
+  height: 20px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 50% !important;
+  transition: all 0.3s ease !important;
+}
+
+.quantum-close:hover {
+  background: rgba(255, 0, 64, 0.2) !important;
+  box-shadow: 0 0 10px #ff0040 !important;
+}
+
+/* Cyber Warning Overlay */
+#cyber-warning {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  background: linear-gradient(90deg, #ff0040, #000, #ff0040) !important;
+  color: #00ff00 !important;
+  padding: 10px !important;
+  text-align: center !important;
+  z-index: 999999 !important;
+  font-family: 'Courier New', monospace !important;
+  font-size: 14px !important;
+  animation: cyberPulse 2s infinite !important;
+  border-bottom: 2px solid #00ff00 !important;
+  letter-spacing: 1px !important;
+  text-shadow: 0 0 5px #00ff00 !important;
+}
+
+/* Threat Quarantine Styles */
+.cyber-threat-quarantined {
+  border: 2px solid #ff0040 !important;
+  background: rgba(255, 0, 64, 0.1) !important;
+  position: relative !important;
+  animation: cyberGlitch 0.5s infinite !important;
+}
+
+.cyber-threat-warning {
+  position: absolute !important;
+  top: -25px !important;
+  left: 0 !important;
+  background: #ff0040 !important;
+  color: #00ff00 !important;
+  padding: 2px 6px !important;
+  font-size: 10px !important;
+  font-family: 'Courier New', monospace !important;
+  z-index: 9999 !important;
+  animation: cyberPulse 1s infinite !important;
+  border-radius: 2px !important;
+  box-shadow: 0 0 10px #ff0040 !important;
+}
+
+/* Matrix Rain Effect (for special occasions) */
+.matrix-rain {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  pointer-events: none !important;
+  z-index: 999998 !important;
+  overflow: hidden !important;
+}
+
+.matrix-column {
+  position: absolute !important;
+  color: #00ff00 !important;
+  font-family: 'Courier New', monospace !important;
+  font-size: 14px !important;
+  animation: matrixRain 3s linear infinite !important;
+  text-shadow: 0 0 5px #00ff00 !important;
+}
+
+/* Cyber Shield Status Indicator */
+.cyber-shield-indicator {
+  position: fixed !important;
+  top: 10px !important;
+  left: 10px !important;
+  z-index: 999999 !important;
+  font-size: 12px !important;
+  animation: cyberPulse 2s infinite !important;
+  pointer-events: none !important;
+  color: #00ff00 !important;
+  text-shadow: 0 0 5px #00ff00 !important;
+  background: rgba(0, 0, 0, 0.7) !important;
+  padding: 5px 8px !important;
+  border-radius: 15px !important;
+  border: 1px solid #00ff00 !important;
+  font-family: 'Courier New', monospace !important;
+}
+
+/* Fortress Shield Overlay (for blocked sites) */
+.fortress-shield-overlay {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%) !important;
+  z-index: 999999 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-family: 'Courier New', monospace !important;
+  color: #00ff00 !important;
+}
+
+.fortress-content {
+  text-align: center !important;
+  max-width: 500px !important;
+  padding: 40px !important;
+  border: 2px solid #00ff00 !important;
+  border-radius: 10px !important;
+  background: rgba(0, 0, 0, 0.8) !important;
+  box-shadow: 0 0 30px rgba(0, 255, 0, 0.3) !important;
+}
+
+.fortress-icon {
+  font-size: 48px !important;
+  margin-bottom: 20px !important;
+  animation: cyberPulse 2s infinite !important;
+}
+
+.fortress-title {
+  font-size: 24px !important;
+  color: #ff0040 !important;
+  margin-bottom: 15px !important;
+  text-shadow: 0 0 10px #ff0040 !important;
+  letter-spacing: 2px !important;
+}
+
+.fortress-message {
+  font-size: 14px !important;
+  margin-bottom: 20px !important;
+  line-height: 1.6 !important;
+  color: #00ffff !important;
+}
+
+.fortress-buttons {
+  display: flex !important;
+  gap: 15px !important;
+  justify-content: center !important;
+  flex-wrap: wrap !important;
+}
+
+.fortress-btn {
+  background: transparent !important;
+  border: 1px solid #00ff00 !important;
+  color: #00ff00 !important;
+  padding: 10px 20px !important;
+  font-family: inherit !important;
+  font-size: 12px !important;
+  cursor: pointer !important;
+  border-radius: 5px !important;
+  transition: all 0.3s ease !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+}
+
+.fortress-btn:hover {
+  background: rgba(0, 255, 0, 0.1) !important;
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.3) !important;
+  transform: translateY(-2px) !important;
+}
+
+.fortress-btn.primary {
+  border-color: #00ffff !important;
+  color: #00ffff !important;
+}
+
+.fortress-btn.danger {
+  border-color: #ff0040 !important;
+  color: #ff0040 !important;
+}
+
+/* Animations */
+@keyframes quantumSlide {
+  from { 
+    transform: translateX(100%) !important; 
+    opacity: 0 !important; 
+  }
+  to { 
+    transform: translateX(0) !important; 
+    opacity: 1 !important; 
+  }
+}
+
+@keyframes cyberPulse {
+  0%, 100% { 
+    opacity: 0.7 !important; 
+    transform: scale(1) !important; 
+  }
+  50% { 
+    opacity: 1 !important; 
+    transform: scale(1.05) !important; 
+  }
+}
+
+@keyframes cyberGlitch {
+  0% { transform: translate(0) !important; }
+  20% { transform: translate(-1px, 1px) !important; }
+  40% { transform: translate(-1px, -1px) !important; }
+  60% { transform: translate(1px, 1px) !important; }
+  80% { transform: translate(1px, -1px) !important; }
+  100% { transform: translate(0) !important; }
+}
+
+@keyframes matrixRain {
+  0% { 
+    transform: translateY(-100%) !important; 
+    opacity: 0 !important; 
+  }
+  10% { 
+    opacity: 1 !important; 
+  }
+  90% { 
+    opacity: 1 !important; 
+  }
+  100% { 
+    transform: translateY(100vh) !important; 
+    opacity: 0 !important; 
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  #cyber-quantum-display {
+    top: 10px !important;
+    right: 10px !important;
+    left: 10px !important;
+  }
+  
+  .quantum-panel {
+    min-width: auto !important;
+  }
+  
+  .fortress-content {
+    margin: 20px !important;
+    padding: 20px !important;
+  }
+  
+  .fortress-title {
+    font-size: 18px !important;
+  }
+  
+  .fortress-buttons {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+  
+  .fortress-btn {
+    width: 200px !important;
+  }
+}

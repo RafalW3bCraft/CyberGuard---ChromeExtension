@@ -1,32 +1,66 @@
 {
-    "manifest_version": 3,
-    "name": "FocusPro - Productivity Booster",
-    "version": "1.0",
-    "description": "Block distracting sites, boost productivity, and monitor browsing habits.",
-    "permissions": ["storage", "tabs", "alarms", "notifications", "scripting", "webNavigation"],
-    "action": {
-      "default_popup": "popup.html",
-      "default_icon": {
-        "16": "icon.png",
-        "48": "icon.png",
-        "128": "icon.png"
-      }
-    },
-    "background": {
-      "service_worker": "background.js"
-    },
-    "host_permissions": ["<all_urls>"],
-    "options_page": "options.html",
-    "icons": {
-      "16": "icon.png",
-      "48": "icon.png",
-      "128": "icon.png"
-    },
-    "content_scripts": [
-      {
-        "matches": ["<all_urls>"],
-        "js": ["content.js"]
-      }
-    ]
-  }
+  "manifest_version": 3,
+  "name": "CyberGuard - Digital Security Suite",
+  "version": "1.0.0",
+  "description": "Advanced cyber-themed browser security extension with threat monitoring, digital fortress protection, and neural network analytics.",
   
+  "permissions": [
+    "storage",
+    "tabs",
+    "activeTab",
+    "alarms",
+    "notifications",
+    "webNavigation",
+    "scripting"
+  ],
+  
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  
+  "background": {
+    "service_worker": "src/background/service-worker.js"
+  },
+  
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["src/content/cyber-shield.js"],
+      "css": ["src/styles/cyber-overlay.css"],
+      "run_at": "document_start"
+    }
+  ],
+  
+  "action": {
+    "default_popup": "src/popup/cyber-dashboard.html",
+    "default_title": "CyberGuard Control Panel",
+    "default_icon": {
+      "16": "src/assets/icons/cyber-16.png",
+      "32": "src/assets/icons/cyber-32.png",
+      "48": "src/assets/icons/cyber-48.png",
+      "128": "src/assets/icons/cyber-128.png"
+    }
+  },
+  
+  "options_page": "src/options/neural-config.html",
+  
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "src/assets/icons/*",
+        "src/assets/sounds/*",
+        "src/assets/effects/*",
+        "src/pages/fortress-shield.html",
+        "src/styles/*"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  
+  "icons": {
+    "16": "src/assets/icons/cyber-16.png",
+    "32": "src/assets/icons/cyber-32.png",
+    "48": "src/assets/icons/cyber-48.png",
+    "128": "src/assets/icons/cyber-128.png"
+  }
+}
