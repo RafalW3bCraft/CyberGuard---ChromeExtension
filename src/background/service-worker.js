@@ -249,11 +249,20 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       secureConnections: secureConnections,
       blockedThreats: blockedThreats
     });
+    return true;
   } else if (request.action === 'activateFortress') {
-    activateDigitalFortress(sender.tab.id, request.hostname, 'USER_ACTIVATED');
-    sendResponse({ status: 'FORTRESS_ACTIVATED' });
+    // Check if sender has a valid tab
+    if (sender.tab && sender.tab.id) {
+      activateDigitalFortress(sender.tab.id, request.hostname, 'USER_ACTIVATED');
+      sendResponse({ status: 'FORTRESS_ACTIVATED' });
+    } else {
+      sendResponse({ status: 'ERROR', message: 'No valid tab found' });
+    }
+    return true;
   }
   
+  // Always send a response to prevent port closure errors
+  sendResponse({ status: 'UNKNOWN_ACTION' });
   return true;
 });
 

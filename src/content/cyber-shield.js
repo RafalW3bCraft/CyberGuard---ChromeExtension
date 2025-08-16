@@ -35,77 +35,117 @@
   }
   
   function startRealTimeScanning() {
-    // Scan for suspicious elements
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.addedNodes.length > 0) {
-          scanForThreats(mutation.addedNodes);
+    try {
+      // Scan for suspicious elements
+      const observer = new MutationObserver((mutations) => {
+        try {
+          mutations.forEach((mutation) => {
+            if (mutation.addedNodes && mutation.addedNodes.length > 0) {
+              scanForThreats(mutation.addedNodes);
+            }
+          });
+        } catch (error) {
+          console.warn('CyberGuard mutation observer error:', error);
         }
       });
-    });
-    
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true
-    });
-    
-    // Initial page scan
-    setTimeout(() => {
-      performQuantumScan();
-    }, 1000);
+      
+      // Only observe if document.body exists
+      if (document.body) {
+        observer.observe(document.body, {
+          childList: true,
+          subtree: true
+        });
+      } else {
+        // Wait for body to be available
+        document.addEventListener('DOMContentLoaded', () => {
+          if (document.body) {
+            observer.observe(document.body, {
+              childList: true,
+              subtree: true
+            });
+          }
+        });
+      }
+      
+      // Initial page scan
+      setTimeout(() => {
+        performQuantumScan();
+      }, 1000);
+    } catch (error) {
+      console.warn('CyberGuard scanning initialization error:', error);
+    }
   }
   
   function scanForThreats(nodes) {
     nodes.forEach(node => {
-      if (node.nodeType === Node.ELEMENT_NODE) {
-        // Check for suspicious patterns
-        const suspiciousPatterns = [
-          /download.*exe/i,
-          /click.*here.*now/i,
-          /urgent.*action.*required/i,
-          /congratulations.*winner/i,
-          /free.*money/i
-        ];
-        
-        const textContent = node.textContent || '';
-        const isSuspicious = suspiciousPatterns.some(pattern => pattern.test(textContent));
-        
-        if (isSuspicious) {
-          quarantineElement(node);
+      if (node && node.nodeType === Node.ELEMENT_NODE) {
+        try {
+          // Check for suspicious patterns
+          const suspiciousPatterns = [
+            /download.*exe/i,
+            /click.*here.*now/i,
+            /urgent.*action.*required/i,
+            /congratulations.*winner/i,
+            /free.*money/i
+          ];
+          
+          const textContent = node.textContent || '';
+          const className = (node.className && typeof node.className === 'string') ? node.className.toLowerCase() : '';
+          
+          // Check text content and class names for threats
+          const isSuspicious = suspiciousPatterns.some(pattern => 
+            pattern.test(textContent) || pattern.test(className)
+          );
+          
+          if (isSuspicious) {
+            quarantineElement(node);
+          }
+        } catch (error) {
+          console.warn('CyberGuard scan error:', error);
         }
       }
     });
   }
   
   function quarantineElement(element) {
-    // Apply cyber quarantine effect
-    element.style.cssText = `
-      border: 2px solid #ff0040 !important;
-      background: rgba(255, 0, 64, 0.1) !important;
-      position: relative !important;
-      animation: cyberGlitch 0.5s infinite !important;
-    `;
-    
-    // Add warning overlay
-    const warning = document.createElement('div');
-    warning.innerHTML = '⚠️ THREAT DETECTED';
-    warning.style.cssText = `
-      position: absolute;
-      top: -25px;
-      left: 0;
-      background: #ff0040;
-      color: #00ff00;
-      padding: 2px 6px;
-      font-size: 10px;
-      font-family: 'Courier New', monospace;
-      z-index: 9999;
-      animation: cyberPulse 1s infinite;
-    `;
-    
-    element.style.position = 'relative';
-    element.appendChild(warning);
-    
-    console.log('🚨 Suspicious element quarantined');
+    try {
+      // Validate element before manipulation
+      if (!element || !element.style) {
+        return;
+      }
+      
+      // Apply cyber quarantine effect
+      element.style.cssText = `
+        border: 2px solid #ff0040 !important;
+        background: rgba(255, 0, 64, 0.1) !important;
+        position: relative !important;
+        animation: cyberGlitch 0.5s infinite !important;
+      `;
+      
+      // Add warning overlay
+      const warning = document.createElement('div');
+      warning.textContent = '⚠️ THREAT DETECTED'; // Use textContent for security
+      warning.style.cssText = `
+        position: absolute;
+        top: -25px;
+        left: 0;
+        background: #ff0040;
+        color: #00ff00;
+        padding: 2px 6px;
+        font-size: 10px;
+        font-family: 'Courier New', monospace;
+        z-index: 9999;
+        animation: cyberPulse 1s infinite;
+        pointer-events: none;
+      `;
+      
+      element.style.position = 'relative';
+      element.appendChild(warning);
+      
+      console.log('🚨 Suspicious element quarantined');
+    } catch (error) {
+      console.warn('CyberGuard quarantine error:', error);
+    }
   }
   
   function performQuantumScan() {
@@ -253,13 +293,24 @@
   
   // Listen for messages from popup
   chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.action === 'performDeepScan') {
-      performQuantumScan();
-      sendResponse({ status: 'SCAN_COMPLETE' });
-    } else if (request.action === 'toggleShield') {
-      shieldConfig.realTimeProtection = !shieldConfig.realTimeProtection;
-      chrome.storage.sync.set({ cyberSettings: shieldConfig });
-      sendResponse({ shieldActive: shieldConfig.realTimeProtection });
+    try {
+      if (request.action === 'performDeepScan') {
+        performQuantumScan();
+        sendResponse({ status: 'SCAN_COMPLETE' });
+      } else if (request.action === 'toggleShield') {
+        shieldConfig.realTimeProtection = !shieldConfig.realTimeProtection;
+        chrome.storage.sync.set({ cyberSettings: shieldConfig }, () => {
+          if (chrome.runtime.lastError) {
+            console.warn('Storage error:', chrome.runtime.lastError);
+          }
+        });
+        sendResponse({ shieldActive: shieldConfig.realTimeProtection });
+      } else {
+        sendResponse({ status: 'UNKNOWN_ACTION' });
+      }
+    } catch (error) {
+      console.warn('CyberGuard message handling error:', error);
+      sendResponse({ status: 'ERROR', message: error.message });
     }
     
     return true;

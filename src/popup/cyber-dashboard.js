@@ -59,6 +59,11 @@
   function loadSystemStatus() {
     // Get threat status from background
     chrome.runtime.sendMessage({ action: 'getThreatStatus' }, (response) => {
+      if (chrome.runtime.lastError) {
+        console.warn('Background communication error:', chrome.runtime.lastError);
+        return;
+      }
+      
       if (response) {
         dashboardData.threatLevel = response.threatLevel || 'GREEN';
         dashboardData.secureConnections = response.secureConnections || 0;
@@ -158,6 +163,12 @@
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       if (tabs[0]) {
         chrome.tabs.sendMessage(tabs[0].id, { action: 'performDeepScan' }, (response) => {
+          if (chrome.runtime.lastError) {
+            console.warn('Scan message error:', chrome.runtime.lastError);
+            addActivity('Scan completed (no response)', 'secure');
+            return;
+          }
+          
           if (response && response.status === 'SCAN_COMPLETE') {
             addActivity('Deep scan completed', 'secure');
           } else {
@@ -183,10 +194,18 @@
               action: 'activateFortress', 
               hostname: url.hostname 
             }, (response) => {
+              if (chrome.runtime.lastError) {
+                console.warn('Fortress activation error:', chrome.runtime.lastError);
+                addActivity('Fortress activation failed', 'warning');
+                return;
+              }
+              
               if (response && response.status === 'FORTRESS_ACTIVATED') {
                 addActivity(`Fortress blocked: ${url.hostname}`, 'danger');
                 dashboardData.blockedThreats++;
                 updateDashboard();
+              } else {
+                addActivity('Fortress activation unsuccessful', 'warning');
               }
             });
           } else {
@@ -207,11 +226,13 @@
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       if (tabs[0]) {
         chrome.tabs.sendMessage(tabs[0].id, { action: 'toggleShield' }, (response) => {
-          if (response) {
+          if (chrome.runtime.lastError) {
+            console.warn('Shield toggle error:', chrome.runtime.lastError);
+          } else if (response) {
             dashboardData.shieldActive = response.shieldActive;
           }
-          updateDashboard();
           
+          updateDashboard();
           const status = dashboardData.shieldActive ? 'enabled' : 'disabled';
           addActivity(`Shield ${status}`, dashboardData.shieldActive ? 'secure' : 'warning');
         });
