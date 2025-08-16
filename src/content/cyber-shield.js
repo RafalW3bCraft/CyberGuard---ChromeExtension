@@ -80,13 +80,21 @@
     nodes.forEach(node => {
       if (node && node.nodeType === Node.ELEMENT_NODE) {
         try {
-          // Check for suspicious patterns
+          // Enhanced suspicious patterns for adult content and scams
           const suspiciousPatterns = [
+            // Malware and scam patterns
             /download.*exe/i,
             /click.*here.*now/i,
             /urgent.*action.*required/i,
             /congratulations.*winner/i,
-            /free.*money/i
+            /free.*money/i,
+            /you.*have.*won/i,
+            /claim.*now/i,
+            /limited.*time.*offer/i,
+            // Adult content patterns
+            /xxx|porn|adult|sex|nude|cam|live.*show|18\+|nsfw/i,
+            /hot.*singles|hook.*up|adult.*dating|xxx.*chat/i,
+            /meet.*local|one.*night|adult.*video|webcam/i
           ];
           
           const textContent = node.textContent || '';
@@ -163,11 +171,20 @@
     // Check HTTPS status
     const isSecure = window.location.protocol === 'https:';
     
-    // Scan for tracking scripts
+    // Enhanced tracking script detection
     const scripts = Array.from(document.scripts);
     const trackingScripts = scripts.filter(script => {
       const src = script.src || '';
-      return /analytics|tracking|ads|google-analytics|facebook|twitter/i.test(src);
+      return /analytics|tracking|ads|google-analytics|facebook|twitter|doubleclick|googlesyndication|amazon-adsystem|quantserve|scorecardresearch|outbrain|taboola|criteo|addthis|sharethis/i.test(src);
+    });
+    
+    // Scan for tracking pixels and beacons
+    const trackingPixels = Array.from(document.querySelectorAll('img[src*="analytics"], img[src*="tracking"], img[width="1"][height="1"]'));
+    
+    // Scan for third-party iframes (potential trackers)
+    const trackingIframes = Array.from(document.querySelectorAll('iframe')).filter(iframe => {
+      const src = iframe.src || '';
+      return /ads|analytics|tracking|facebook|twitter|google/i.test(src);
     });
     
     // Display quantum scan results
@@ -175,6 +192,8 @@
       showQuantumResults({
         secure: isSecure,
         trackingScripts: trackingScripts.length,
+        trackingPixels: trackingPixels.length,
+        trackingIframes: trackingIframes.length,
         totalScripts: scripts.length,
         url: currentUrl
       });
@@ -190,8 +209,10 @@
         <div class="quantum-header">🔬 QUANTUM SCAN COMPLETE</div>
         <div class="quantum-data">
           <div>🔒 ENCRYPTION: ${scanData.secure ? '<span class="secure">ACTIVE</span>' : '<span class="insecure">INACTIVE</span>'}</div>
-          <div>📡 TRACKERS: <span class="warning">${scanData.trackingScripts}</span></div>
-          <div>⚡ SCRIPTS: ${scanData.totalScripts}</div>
+          <div>📡 TRACK SCRIPTS: <span class="warning">${scanData.trackingScripts}</span></div>
+          <div>🕵️ TRACK PIXELS: <span class="warning">${scanData.trackingPixels || 0}</span></div>
+          <div>🎯 TRACK IFRAMES: <span class="warning">${scanData.trackingIframes || 0}</span></div>
+          <div>⚡ TOTAL SCRIPTS: ${scanData.totalScripts}</div>
           <div>🌐 HOST: ${scanData.url}</div>
         </div>
         <div class="quantum-close">×</div>

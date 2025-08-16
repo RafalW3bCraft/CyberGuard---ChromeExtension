@@ -25,7 +25,7 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["src/content/cyber-shield.js"],
+      "js": ["src/content/cyber-shield.js", "src/content/adblock.js"],
       "css": ["src/styles/cyber-overlay.css"],
       "run_at": "document_start"
     }

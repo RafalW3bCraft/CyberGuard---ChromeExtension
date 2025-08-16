@@ -99,8 +99,13 @@
     // Settings Button
     elements.settingsBtn.addEventListener('click', openNeuralConfig);
     
-    // Update dashboard periodically
-    setInterval(loadSystemStatus, 10000); // Every 10 seconds
+    // Update dashboard periodically with cleanup
+    const dashboardInterval = setInterval(loadSystemStatus, 10000); // Every 10 seconds
+    
+    // Cleanup interval on page unload
+    window.addEventListener('beforeunload', () => {
+      clearInterval(dashboardInterval);
+    });
   }
   
   function updateDashboard() {
@@ -363,6 +368,158 @@
     console.log('🔴 Matrix sequence activated');
   }
   
-  console.log('🚀 CyberGuard Dashboard Controller Ready');
+  // Enhanced Site Information Functions
+  function loadCurrentSiteInfo() {
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      if (tabs[0] && tabs[0].url && (tabs[0].url.startsWith('http://') || tabs[0].url.startsWith('https://'))) {
+        const hostname = new URL(tabs[0].url).hostname;
+        document.getElementById('currentDomain').textContent = hostname;
+        
+        // Check for cached scan data
+        chrome.runtime.sendMessage({ action: 'getLastScanResult' }, (response) => {
+          if (response && response.status === 'SCAN_COMPLETE' && response.url === hostname) {
+            displaySiteInfo(response.siteInfo);
+          }
+        });
+      } else {
+        document.getElementById('currentDomain').textContent = 'System Page';
+        document.getElementById('siteDetails').textContent = 'Cannot analyze system pages';
+      }
+    });
+  }
+  
+  function displaySiteInfo(siteInfo) {
+    const detailsElement = document.getElementById('siteDetails');
+    
+    if (!siteInfo || siteInfo.error) {
+      detailsElement.innerHTML = 'Error gathering site information';
+      return;
+    }
+    
+    let html = `
+      <div class="site-overview">
+        <div class="geo-item">
+          <span class="geo-label">DOMAIN:</span>
+          <span class="geo-value">${siteInfo.domain}</span>
+        </div>
+        <div class="geo-item">
+          <span class="geo-label">PROTOCOL:</span>
+          <span class="geo-value">${siteInfo.protocol}</span>
+        </div>
+        <div class="geo-item">
+          <span class="geo-label">PORT:</span>
+          <span class="geo-value">${siteInfo.port}</span>
+        </div>
+      </div>
+    `;
+    
+    if (siteInfo.geolocation) {
+      html += `
+        <div class="geo-info">
+          <div class="geo-item">
+            <span class="geo-label">IP ADDRESS:</span>
+            <span class="geo-value">${siteInfo.geolocation.ip}</span>
+          </div>
+          <div class="geo-item">
+            <span class="geo-label">LATITUDE:</span>
+            <span class="geo-value">${siteInfo.geolocation.latitude}</span>
+          </div>
+          <div class="geo-item">
+            <span class="geo-label">LONGITUDE:</span>
+            <span class="geo-value">${siteInfo.geolocation.longitude}</span>
+          </div>
+          <div class="geo-item">
+            <span class="geo-label">CITY:</span>
+            <span class="geo-value">${siteInfo.geolocation.city}</span>
+          </div>
+          <div class="geo-item">
+            <span class="geo-label">REGION:</span>
+            <span class="geo-value">${siteInfo.geolocation.region}</span>
+          </div>
+          <div class="geo-item">
+            <span class="geo-label">COUNTRY:</span>
+            <span class="geo-value">${siteInfo.geolocation.country}</span>
+          </div>
+          <div class="geo-item">
+            <span class="geo-label">TIMEZONE:</span>
+            <span class="geo-value">${siteInfo.geolocation.timezone}</span>
+          </div>
+          <div class="geo-item">
+            <span class="geo-label">ISP:</span>
+            <span class="geo-value">${siteInfo.geolocation.isp}</span>
+          </div>
+        </div>
+      `;
+    }
+    
+    if (siteInfo.securityInfo) {
+      const trustScore = siteInfo.securityInfo.trustScore || 0;
+      const scoreClass = trustScore >= 70 ? 'high' : trustScore >= 40 ? 'medium' : 'low';
+      
+      html += `
+        <div class="security-score ${scoreClass}">
+          <span class="geo-label">TRUST SCORE:</span>
+          <span class="geo-value">${trustScore}/100</span>
+        </div>
+      `;
+    }
+    
+    html += `
+      <div class="scan-timestamp">
+        <div class="geo-item">
+          <span class="geo-label">SCAN DATE:</span>
+          <span class="geo-value">${new Date(siteInfo.timestamp).toLocaleString()}</span>
+        </div>
+      </div>
+    `;
+    
+    detailsElement.innerHTML = html;
+  }
+  
+  // Override the existing performQuantumScan function with enhanced version
+  function performQuantumScanEnhanced() {
+    addActivity('Enhanced quantum scan initiated', 'secure');
+    showButtonAnimation(elements.quantumScanBtn);
+    
+    const detailsElement = document.getElementById('siteDetails');
+    detailsElement.innerHTML = '<div class="loading">PERFORMING QUANTUM SCAN...</div>';
+    detailsElement.classList.add('loading');
+    
+    chrome.runtime.sendMessage({ action: 'performQuantumScan' }, (response) => {
+      detailsElement.classList.remove('loading');
+      
+      if (chrome.runtime.lastError) {
+        console.warn('Quantum scan error:', chrome.runtime.lastError.message);
+        addActivity('Quantum scan failed', 'warning');
+        detailsElement.innerHTML = 'Scan failed - check console for errors';
+        return;
+      }
+      
+      if (response && response.status === 'SCAN_COMPLETE') {
+        addActivity('Enhanced scan completed', 'secure');
+        displaySiteInfo(response.siteInfo);
+        
+        // Update dashboard with new threat data if available
+        if (response.threatAnalysis) {
+          dashboardData.threatLevel = response.threatAnalysis.threatLevel;
+          dashboardData.secureConnections = response.threatAnalysis.secureConnections;
+          dashboardData.blockedThreats = response.threatAnalysis.blockedThreats;
+          updateDashboard();
+        }
+      } else {
+        addActivity('Scan completed with errors', 'warning');
+        detailsElement.innerHTML = 'Scan completed but no data received';
+      }
+    });
+  }
+
+  // Replace the old quantum scan with enhanced version
+  elements.quantumScanBtn.removeEventListener('click', performQuantumScan);
+  elements.quantumScanBtn.addEventListener('click', performQuantumScanEnhanced);
+  
+  // Load site info on startup
+  loadCurrentSiteInfo();
+  
+  console.log('🚀 CyberGuard Dashboard Controller Ready with Enhanced Site Analysis');
   
 })();

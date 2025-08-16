@@ -21,6 +21,7 @@
   // Shield state
   let shieldData = {
     blockedSite: 'unknown.domain',
+    blockReason: 'THREAT_DETECTED',
     startTime: Date.now(),
     threatsBlocked: 0,
     securityScore: 100
@@ -67,16 +68,52 @@
     // Get blocked site from URL parameter
     const urlParams = new URLSearchParams(window.location.search);
     const blocked = urlParams.get('blocked');
+    const reason = urlParams.get('reason');
     
     if (blocked) {
       shieldData.blockedSite = decodeURIComponent(blocked);
+      shieldData.blockReason = reason || 'THREAT_DETECTED';
       elements.blockedSite.textContent = shieldData.blockedSite;
+      updateThreatDisplay();
+    }
+  }
+  
+  function updateThreatDisplay() {
+    const threatTypeElement = document.querySelector('.detail-value.threat-high');
+    const threatDetails = document.querySelector('.threat-details');
+    
+    if (threatTypeElement) {
+      let threatType = 'MALICIOUS CONTENT';
+      let threatColor = '#ff0040';
+      
+      switch (shieldData.blockReason) {
+        case 'ADULT_CONTENT_BLOCKED':
+          threatType = 'ADULT CONTENT';
+          threatColor = '#ff0040';
+          break;
+        case 'TRACKER_DETECTED':
+          threatType = 'TRACKING THREAT';
+          threatColor = '#ffff00';
+          break;
+        case 'THREAT_DETECTED':
+        default:
+          threatType = 'MALICIOUS CONTENT';
+          threatColor = '#ff0040';
+      }
+      
+      threatTypeElement.textContent = threatType;
+      threatTypeElement.style.color = threatColor;
     }
   }
   
   function loadShieldData() {
     // Load data from extension storage
     chrome.storage.sync.get(['digitalFortress', 'neuralAnalytics'], (data) => {
+      if (chrome.runtime.lastError) {
+        console.warn('CyberGuard fortress shield data error:', chrome.runtime.lastError.message || 'Unknown error');
+        return;
+      }
+      
       if (data.digitalFortress && data.digitalFortress.blockedSites) {
         shieldData.threatsBlocked = Object.keys(data.digitalFortress.blockedSites).length;
       }

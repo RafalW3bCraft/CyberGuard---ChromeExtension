@@ -187,7 +187,116 @@ body {
   font-size: 14px;
 }
 
+/* Site Analysis Panel */
+.site-analysis-panel {
+  margin: 15px 0;
+  border: 1px solid var(--cyber-cyan);
+  border-radius: 5px;
+  background: rgba(0, 255, 255, 0.05);
+}
+
+.site-info-display {
+  padding: 15px;
+}
+
+.current-site {
+  margin-bottom: 10px;
+}
+
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.site-label {
+  font-size: 10px;
+  color: var(--cyber-cyan);
+  letter-spacing: 1px;
+}
+
+.site-domain {
+  font-size: 12px;
+  color: var(--cyber-green);
+  font-weight: bold;
+  text-shadow: 0 0 5px var(--cyber-green);
+}
+
+.site-details {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(0, 255, 0, 0.2);
+  border-radius: 3px;
+  padding: 10px;
+  font-size: 10px;
+  line-height: 1.4;
+  color: var(--cyber-green);
+  font-family: 'Courier New', monospace;
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+.site-details.loading {
+  text-align: center;
+  color: var(--cyber-cyan);
+  animation: cyberPulse 1.5s infinite;
+}
+
+.geo-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+  margin: 8px 0;
+}
+
+.geo-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 2px 0;
+  border-bottom: 1px solid rgba(0, 255, 0, 0.1);
+}
+
+.geo-label {
+  color: var(--cyber-cyan);
+  font-size: 9px;
+}
+
+.geo-value {
+  color: var(--cyber-green);
+  font-size: 9px;
+  font-weight: bold;
+}
+
+.security-score {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  padding: 5px;
+  border: 1px solid;
+  border-radius: 3px;
+}
+
+.security-score.high {
+  border-color: var(--cyber-green);
+  background: rgba(0, 255, 0, 0.1);
+}
+
+.security-score.medium {
+  border-color: var(--cyber-yellow);
+  background: rgba(255, 255, 0, 0.1);
+}
+
+.security-score.low {
+  border-color: var(--cyber-red);
+  background: rgba(255, 0, 64, 0.1);
+}
+
 /* Analytics Panel */
+.analytics-panel {
+  margin: 15px 0;
+}
+
 .analytics-display {
   display: flex;
   flex-direction: column;
