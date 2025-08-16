@@ -1,6 +1,7 @@
 {
   "manifest_version": 3,
   "name": "CyberGuard - Digital Security Suite",
+  "author": "RafalW3bCraft",
   "version": "1.0.0",
   "description": "Advanced cyber-themed browser security extension with threat monitoring, digital fortress protection, and neural network analytics.",
   
